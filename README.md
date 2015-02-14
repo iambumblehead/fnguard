@@ -1,4 +1,4 @@
-guardfn
+fnguard
 =======
 **(c)[Bumblehead][0], 2015** [MIT-license](#license)
 
@@ -6,7 +6,7 @@ guardfn
 
 ```javascript
 function gethtml(session, config, templatename, dataarr) {
-  guardfn.isobj(session).isobj(config).isstr(templatename).isarr(dataarr);
+  fnguard.isobj(session).isobj(config).isstr(templatename).isarr(dataarr);
   // continue
 }
 ```
@@ -36,7 +36,7 @@ fnguard.isobj({}).isbool(true).isnotnull("truck").isnum(20).isarr([]); // true
 #### <a id="install"></a>Install:
 
 ```bash
-$ npm install guardfn
+$ npm install fnguard
 ```
 
 ---------------------------------------------------------
