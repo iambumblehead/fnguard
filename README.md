@@ -104,7 +104,8 @@ $ npm test
    ```javascript
    isnotnum : function (n) {
      return !fnguard.isnum(n);
-   }```
+   }
+   ```
 
  * **fnguard.isstr**
    ```javascript
