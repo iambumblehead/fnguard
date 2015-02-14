@@ -18,7 +18,7 @@ Simplified rules are used to determine type. For example, native javascript will
 typeof null === 'object' && typeof [] === 'object'
 ```
 
-Analogous comparison does not pass `fnguard`. Run the tests or look at the source code (small) to understand how it handles comparison.
+Analogous comparison does not pass `fnguard`. Run the tests or look at the [source code][1] (small) to understand how it handles comparison.
 ```javascript
 fnguard.isobj(null); // error !fnguard.check.isobj(null)
 fnguard.isobj([]);   // error !fnguard.check.isobj([])
@@ -30,6 +30,7 @@ fnguard.isobj({}).isbool(true).isnotnull("truck").isnum(20).isarr([]); // true
 ```
 
 [0]: http://www.bumblehead.com                            "bumblehead"
+[1]: https://github.com/iambumblehead/fnguard/blob/master/fnguard.js
 
 ---------------------------------------------------------
 #### <a id="install"></a>Install:
