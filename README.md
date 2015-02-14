@@ -47,7 +47,26 @@ $ npm test
 ```
 
 ---------------------------------------------------------
-#### <a id="how"></a>How:
+#### <a id="example"></a>Example:
+
+A real method from an application using fnguard. An error is thrown right away if a parameter is 'wrong'.
+
+```javascript
+toelem: function(sess, cfg, elem, tplstr, data, fn) {
+  fnguard.isobj(sess).isobj(cfg).isstr(tplstr).isobj(data).isdomelem(elem);
+  fn = optfn(fn);
+  
+  this.depthfirstrender(sess, cfg, data, tplstr, function (err, htmlstr) {
+    if (err) return fn(err);
+    
+    elem.innerHTML = htmlstr;
+    fn(null, elem);
+  });
+},
+```
+
+---------------------------------------------------------
+#### <a id="how"></a>How comparisons are made:
 
  * **fnguard.isobj**
    ```javascript
@@ -175,6 +194,20 @@ $ npm test
    ```javascript
    isnotundefined : function (n) {
      return !fnguard.isundefined(n);
+   }
+   ```
+
+ * **fnguard.isdomelem**
+   ```javascript
+   isdomelem : function (n) {
+     return n instanceof Element;
+   }
+   ```
+
+ * **fnguard.isnotdomelem**
+   ```javascript
+   isnotdomelem : function (n) {
+     return !fnguard.isdomelem(n);
    }
    ```
 

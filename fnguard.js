@@ -1,5 +1,5 @@
 // Filename: fnguard.js
-// Timestamp: 2015.02.12-16:18:58 (last modified)  
+// Timestamp: 2015.02.14-14:06:35 (last modified)  
 // Author(s): Bumblehead (www.bumblehead.com)
 
 var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (check, spec, guarderror) {
@@ -31,6 +31,9 @@ var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (
     },    
     isundefined : function (n) {
       return typeof n === 'undefined';
+    },
+    isdomelem : function (n) {
+      return n instanceof Element;
     },
     isdate : function (n) {
       return n instanceof Date && !isNaN(n);
