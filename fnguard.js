@@ -1,5 +1,5 @@
 // Filename: fnguard.js
-// Timestamp: 2015.02.14-14:06:35 (last modified)  
+// Timestamp: 2015.02.15-11:17:38 (last modified)  
 // Author(s): Bumblehead (www.bumblehead.com)
 
 var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (check, spec, guarderror) {
@@ -16,6 +16,9 @@ var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (
     },
     isnum : function (n) {
       return typeof n === 'number';  
+    },
+    isfn : function (n) {
+      return typeof n === 'function';  
     },
     isstr : function (n) {
       return typeof n === 'string';
@@ -51,6 +54,7 @@ var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (
         .replace(/:msg/, new Error().stack.split(/\n/gi)[3].replace(/^ */, ''))
         .replace(/:argval/, function () {
           if (typeof arg === 'string') {
+            arg = arg.length > 30 ? arg.slice(0, 30) + '...' : arg;
             arg = '"' + arg + '"';
           } else if (Array.isArray(arg)) {
             arg = "[" + arg.toString() + "]";

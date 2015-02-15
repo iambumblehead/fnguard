@@ -85,17 +85,17 @@ toelem: function(sess, cfg, elem, tplstr, data, fn) {
    }
    ```
 
- * **fnguard.isobj**
+ * **fnguard.isnum**
    ```javascript
-   isnumstr : function (n) {
-     return !isNaN(parseFloat(n)) && isFinite(n);
+   isnum : function (n) {
+     return typeof n === 'number'
    }
    ```
 
- * **fnguard.isnotobj**
+ * **fnguard.isnotnum**
    ```javascript
-   isnotnumstr : function (n) {
-     return !fnguard.isnumstr(n);
+   isnotnum : function (n) {
+     return !fnguard.isnum(n);
    }
    ```
 
@@ -113,17 +113,17 @@ toelem: function(sess, cfg, elem, tplstr, data, fn) {
    }
    ```
 
- * **fnguard.isnum**
+ * **fnguard.isfn**
    ```javascript
-   isnum : function (n) {
-     return typeof n === 'number';
+   isfn : function (n) {
+     return typeof n === 'function';
    }
    ```
 
- * **fnguard.isnotnum**
+ * **fnguard.isnotfn**
    ```javascript
-   isnotnum : function (n) {
-     return !fnguard.isnum(n);
+   isnotfn : function (n) {
+     return !fnguard.isfn(n);
    }
    ```
 
