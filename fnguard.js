@@ -1,5 +1,5 @@
 // Filename: fnguard.js
-// Timestamp: 2015.02.15-11:17:38 (last modified)  
+// Timestamp: 2015.02.15-12:05:17 (last modified)  
 // Author(s): Bumblehead (www.bumblehead.com)
 
 var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (check, spec, guarderror) {
@@ -51,7 +51,7 @@ var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (
     throw new Error(
       "!fnguard.check.:fnname(:argval),  :msg"
         .replace(/:fnname/, checkfnname)
-        .replace(/:msg/, new Error().stack.split(/\n/gi)[3].replace(/^ */, ''))
+        .replace(/:msg/, new Error().stack.split(/\n/gi)[5].replace(/^ */, ''))
         .replace(/:argval/, function () {
           if (typeof arg === 'string') {
             arg = arg.length > 30 ? arg.slice(0, 30) + '...' : arg;
@@ -75,8 +75,10 @@ var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (
   });
 
   Object.keys(spec).forEach(function (checkfnname) {
-    check[checkfnname] = function (arg) {
-      return spec[checkfnname](arg) ? check : guarderror(checkfnname, arg);
+    check[checkfnname] = function () {
+      return Array.prototype.every.call(arguments, function (arg) {
+        return spec[checkfnname](arg) || guarderror(checkfnname, arg);
+      }) && check;
     };
   });
 
