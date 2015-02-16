@@ -11,9 +11,7 @@ function gethtml(session, config, templatename, dataarr) {
 }
 ```
 
-Use `fnguard` to throw a type-related error message when a function is called with wrong params. This is useful when refactoring bigger javascript codebases for which you have no unit-tests.
-
-Simplified rules are used to determine type. For example, native javascript will return `true` here:
+Use `fnguard` to throw a type-related error message when a function is called with wrong params. This is useful when refactoring bigger javascript codebases for which you have no unit-tests. Simplified rules are used to determine type. For example, native javascript returns `true` here:
 ```javascript
 typeof null === 'object' && typeof [] === 'object'
 ```
@@ -22,11 +20,6 @@ Analogous comparison does not pass `fnguard`. Run the tests or look at the [sour
 ```javascript
 fnguard.isobj(null); // error !fnguard.check.isobj(null)
 fnguard.isobj([]);   // error !fnguard.check.isobj([])
-```
-
-Chain Guard calls:
-```javascript
-fnguard.isobj({}).isbool(true).isnotnull("truck").isnum(20).isarr([]); // true
 ```
 
 [0]: http://www.bumblehead.com                            "bumblehead"
