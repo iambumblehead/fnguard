@@ -20,7 +20,7 @@ describe("fnguard", function () {
     try {
       guardedfn(1, {}, 3);
     } catch(e) {
-      expect(/^fnguard error check\[isnum\]\("str"\),  at guardedfn/.test(e.message)).toBe(true);
+      expect(/^fnguard error check\[isnum\]\("str"\), arguments\[0\] at guardedfn/.test(e.message)).toBe(true);
     }
   });
 });
@@ -39,31 +39,31 @@ describe("fnguard.isobj( arg )", function () {
     expect( guardedfn({}) ).toBe( true );
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isobj\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isobj\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isobj\(\undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isobj\(\undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isobj\(\instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isobj\(\instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isobj\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isobj\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isobj\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isobj\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is { foo : 'bar' }", function () {  
     expect( guardedfn({ foo : 'bar' }) ).toBe( true );
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isobj\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isobj\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isobj\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isobj\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isobj\("1"\),  at guardedfn/);    
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isobj\("1"\), arguments\[0\] at guardedfn/);    
   });
 });
 
@@ -77,7 +77,7 @@ describe("fnguard.isnotobj( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnotobj\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnotobj\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should not throw error if arg is []", function () {  
     expect( guardedfn([]) ).toBe(true);    
@@ -95,7 +95,7 @@ describe("fnguard.isnotobj( arg )", function () {
     expect( guardedfn(false) ).toBe(true);    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnotobj\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnotobj\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should not throw error if arg is null", function () {  
     expect( guardedfn(null) ).toBe( true );    
@@ -119,34 +119,34 @@ describe("fnguard.isnum( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnum\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnum\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnum\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnum\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnum\(\undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnum\(\undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnum\(\instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnum\(\instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnum\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnum\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnum\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnum\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnum\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnum\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isnum\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isnum\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is 1", function () {  
     expect( guardedfn(1) ).toBe( true );    
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnum\("1"\),  at guardedfn/);    
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnum\("1"\), arguments\[0\] at guardedfn/);    
   });
 });
 
@@ -184,7 +184,7 @@ describe("fnguard.isnotnum( arg )", function () {
     expect( guardedfn(null) ).toBe( true );
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isnotnum\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isnotnum\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is '1'", function () {  
     expect( guardedfn('1') ).toBe( true );
@@ -201,28 +201,28 @@ describe("fnguard.isnumstr( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnumstr\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnumstr\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnumstr\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnumstr\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnumstr\(\undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnumstr\(\undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnumstr\(\instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnumstr\(\instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnumstr\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnumstr\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnumstr\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnumstr\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnumstr\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnumstr\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isnumstr\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isnumstr\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is 1", function () {  
     expect( guardedfn(1) ).toBe( true );    
@@ -266,10 +266,10 @@ describe("fnguard.isnotnumstr( arg )", function () {
     expect( guardedfn(null) ).toBe( true );
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isnotnumstr\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isnotnumstr\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnotnumstr\("1"\),  at guardedfn/);    
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnotnumstr\("1"\), arguments\[0\] at guardedfn/);    
   });
 });
 
@@ -283,34 +283,34 @@ describe("fnguard.isarr( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isarr\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isarr\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should not throw error if arg is []", function () {  
     expect( guardedfn([]) ).toBe( true );
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isarr\(\undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isarr\(\undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isarr\(\instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isarr\(\instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isarr\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isarr\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isarr\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isarr\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isarr\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isarr\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isarr\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isarr\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isarr\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isarr\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isarr\("1"\),  at guardedfn/);    
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isarr\("1"\), arguments\[0\] at guardedfn/);    
   });
 });
 
@@ -327,7 +327,7 @@ describe("fnguard.isnotarr( arg )", function () {
     expect( guardedfn({}) ).toBe( true );
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnotarr\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnotarr\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is undefined", function () {  
     expect( guardedfn(undefined) ).toBe( true );
@@ -365,34 +365,34 @@ describe("fnguard.isnull( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnull\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnull\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnull\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnull\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnull\(\undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnull\(\undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnull\(\instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnull\(\instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnull\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnull\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnull\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnull\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnull\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnull\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should not throw error if arg is null", function () {  
     expect( guardedfn(null) ).toBe(true);
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isnull\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isnull\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnull\("1"\),  at guardedfn/);    
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnull\("1"\), arguments\[0\] at guardedfn/);    
   });
 });
 
@@ -427,7 +427,7 @@ describe("fnguard.isnotnull( arg )", function () {
     expect( guardedfn({ foo : 'bar' }) ).toBe(true);
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isnotnull\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isnotnull\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is 1", function () {  
     expect( guardedfn(1) ).toBe(true);
@@ -447,16 +447,16 @@ describe("fnguard.isbool( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isbool\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isbool\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isbool\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isbool\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isbool\(\undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isbool\(\undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isbool\(\instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isbool\(\instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is true", function () {  
     expect( guardedfn(true) ).toBe( true );    
@@ -465,16 +465,16 @@ describe("fnguard.isbool( arg )", function () {
     expect( guardedfn(false) ).toBe( true );    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isbool\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isbool\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isbool\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isbool\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isbool\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isbool\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isbool\("1"\),  at guardedfn/);    
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isbool\("1"\), arguments\[0\] at guardedfn/);    
   });
 });
 
@@ -500,10 +500,10 @@ describe("fnguard.isnotbool( arg )", function () {
     expect( guardedfn(new Date()) ).toBe(true);
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnotbool\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnotbool\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnotbool\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnotbool\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is { foo : 'bar' }", function () {  
     expect( guardedfn({ foo : 'bar' }) ).toBe(true);
@@ -529,34 +529,34 @@ describe("fnguard.isundefined( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isundefined\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isundefined\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isundefined\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isundefined\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is undefined", function () {  
     expect( guardedfn(undefined) ).toBe(true);
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isundefined\(instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isundefined\(instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isundefined\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isundefined\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isundefined\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isundefined\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isundefined\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isundefined\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isundefined\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isundefined\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isundefined\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isundefined\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isundefined\("1"\),  at guardedfn/);    
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isundefined\("1"\), arguments\[0\] at guardedfn/);    
   });
 });
 
@@ -576,7 +576,7 @@ describe("fnguard.isnotundefined( arg )", function () {
     expect( guardedfn([]) ).toBe( true );
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnotundefined\(\undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnotundefined\(\undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is new Date()", function () {  
     expect( guardedfn(new Date()) ).toBe( true );
@@ -611,34 +611,34 @@ describe("fnguard.isdate( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isdate\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isdate\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isdate\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isdate\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isdate\(undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isdate\(undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is new Date()", function () {  
     expect( guardedfn(new Date()) ).toBe(true);
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isdate\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isdate\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isdate\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isdate\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isdate\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isdate\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isdate\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isdate\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isdate\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isdate\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isdate\("1"\),  at guardedfn/);    
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isdate\("1"\), arguments\[0\] at guardedfn/);    
   });
 });
 
@@ -661,7 +661,7 @@ describe("fnguard.isnotdate( arg )", function () {
     expect( guardedfn(undefined) ).toBe( true );
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnotdate\(instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnotdate\(instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is true", function () {  
     expect( guardedfn(true) ).toBe( true );
@@ -734,34 +734,34 @@ describe("fnguard.isnotany( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnotany\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isnotany\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnotany\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isnotany\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnotany\(undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isnotany\(undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnotany\(instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isnotany\(instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnotany\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isnotany\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnotany\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isnotany\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnotany\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isnotany\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isnotany\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isnotany\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isnotany\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isnotany\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnotany\("1"\),  at guardedfn/);    
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnotany\("1"\), arguments\[0\] at guardedfn/);    
   });
 });
 
@@ -775,31 +775,31 @@ describe("fnguard.isstr( arg )", function () {
   }
 
   it("should throw error if arg is {}", function () {  
-    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isstr\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({}) ).toMatch(/^!fnguard.check.isstr\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is []", function () {  
-    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isstr\(\[\]\),  at guardedfn/);    
+    expect( guardedfn([]) ).toMatch(/^!fnguard.check.isstr\(\[\]\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is undefined", function () {  
-    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isstr\(undefined\),  at guardedfn/);    
+    expect( guardedfn(undefined) ).toMatch(/^!fnguard.check.isstr\(undefined\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is new Date()", function () {  
-    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isstr\(instanceof Date, .*\),  at guardedfn/);    
+    expect( guardedfn(new Date()) ).toMatch(/^!fnguard.check.isstr\(instanceof Date, .*\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is true", function () {  
-    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isstr\(true\),  at guardedfn/);    
+    expect( guardedfn(true) ).toMatch(/^!fnguard.check.isstr\(true\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is false", function () {  
-    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isstr\(false\),  at guardedfn/);    
+    expect( guardedfn(false) ).toMatch(/^!fnguard.check.isstr\(false\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is { foo : 'bar' }", function () {  
-    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isstr\(\[object Object\]\),  at guardedfn/);
+    expect( guardedfn({ foo : 'bar' }) ).toMatch(/^!fnguard.check.isstr\(\[object Object\]\), arguments\[0\] at guardedfn/);
   });
   it("should throw error if arg is null", function () {  
-    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isstr\(null\),  at guardedfn/);    
+    expect( guardedfn(null) ).toMatch(/^!fnguard.check.isstr\(null\), arguments\[0\] at guardedfn/);    
   });
   it("should throw error if arg is 1", function () {  
-    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isstr\(1\),  at guardedfn/);    
+    expect( guardedfn(1) ).toMatch(/^!fnguard.check.isstr\(1\), arguments\[0\] at guardedfn/);    
   });
   it("should not throw error if arg is '1'", function () {  
     expect( guardedfn('1') ).toBe( true );
@@ -843,12 +843,12 @@ describe("fnguard.isnotstr( arg )", function () {
     expect( guardedfn(1) ).toBe(true);
   });
   it("should throw error if arg is '1'", function () {  
-    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnotstr\("1"\),  at guardedfn/);
+    expect( guardedfn('1') ).toMatch(/^!fnguard.check.isnotstr\("1"\), arguments\[0\] at guardedfn/);
   });
   it("should throw error showing at most 30 chars of str if str is longer than 30 '1'", function () {  
     expect( 
       guardedfn('01234567890123456789012345678901234567890123456789012345678901234567890') 
-    ).toMatch(/^!fnguard.check.isnotstr\("012345678901234567890123456789..."\),  at guardedfn/);
+    ).toMatch(/^!fnguard.check.isnotstr\("012345678901234567890123456789..."\), arguments\[0\] at guardedfn/);
   });
 });
 

@@ -64,10 +64,10 @@ toelem: function(sess, cfg, elem, tplstr, data, fn) {
  * **fnguard.isobj**
    ```javascript
    isobj : function (o) {
-     return typeof o === 'object' 
-       && !Array.isArray(o) 
-       && !(o instanceof Date)
-       && o !== null;
+     return typeof o === 'object'
+       && !this.isarr(o) 
+       && !this.isdate(o)
+       && !this.isnull(o);
    }
    ```
 

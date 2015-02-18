@@ -1,5 +1,5 @@
 // Filename: fnguard.js
-// Timestamp: 2015.02.15-12:05:17 (last modified)  
+// Timestamp: 2015.02.17-23:20:43 (last modified)  
 // Author(s): Bumblehead (www.bumblehead.com)
 
 var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (check, spec, guarderror) {
@@ -7,9 +7,9 @@ var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (
   spec = {
     isobj : function (o) {
       return typeof o === 'object' 
-        && !Array.isArray(o) 
-        && !(o instanceof Date)
-        && o !== null;
+        && !spec.isarr(o) 
+        && !spec.isdate(o)
+        && !spec.isnull(o);
     },
     isnumstr : function (n) {
       return !isNaN(parseFloat(n)) && isFinite(n);  
@@ -47,11 +47,12 @@ var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (
   };
 
   // define first message of stack to indicate source fnguard callee
-  guarderror = function (checkfnname, arg) {    
+  guarderror = function (checkfnname, arg, i) {    
     throw new Error(
-      "!fnguard.check.:fnname(:argval),  :msg"
+      "!fnguard.check.:fnname(:argval), arguments[:i] :msg"
         .replace(/:fnname/, checkfnname)
         .replace(/:msg/, new Error().stack.split(/\n/gi)[5].replace(/^ */, ''))
+        .replace(/:i/, i)
         .replace(/:argval/, function () {
           if (typeof arg === 'string') {
             arg = arg.length > 30 ? arg.slice(0, 30) + '...' : arg;
@@ -76,8 +77,8 @@ var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (
 
   Object.keys(spec).forEach(function (checkfnname) {
     check[checkfnname] = function () {
-      return Array.prototype.every.call(arguments, function (arg) {
-        return spec[checkfnname](arg) || guarderror(checkfnname, arg);
+      return Array.prototype.every.call(arguments, function (arg, i) {
+        return spec[checkfnname](arg) || guarderror(checkfnname, arg, i);
       }) && check;
     };
   });
