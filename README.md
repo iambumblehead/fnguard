@@ -6,7 +6,7 @@ fnguard
 
 ```javascript
 function gethtml(session, config, templatename, dataarr) {
-  fnguard.isobj(session).isobj(config).isstr(templatename).isarr(dataarr);
+  fnguard.isobj(session, config).isstr(templatename).isarr(dataarr);
   // continue
 }
 ```
@@ -45,11 +45,11 @@ $ npm test
 A real method from an application using fnguard. An error is thrown right away if a parameter is 'wrong'.
 
 ```javascript
-toelem: function(sess, cfg, elem, tplstr, data, fn) {
-  fnguard.isobj(sess).isobj(cfg).isstr(tplstr).isobj(data).isdomelem(elem);
+toelem: function(sess, cfg, tplstr, data, elem, fn) {
+  fnguard.isobj(sess, cfg).isstr(tplstr).isobj(data).isdomelem(elem);
   fn = optfn(fn);
   
-  this.depthfirstrender(sess, cfg, data, tplstr, function (err, htmlstr) {
+  this.depthfirstrender(sess, cfg, tplstr, data, function (err, htmlstr) {
     if (err) return fn(err);
     
     elem.innerHTML = htmlstr;
@@ -239,7 +239,7 @@ toelem: function(sess, cfg, elem, tplstr, data, fn) {
 
 (The MIT License)
 
-Copyright (c) 2013 [Bumblehead][0] <chris@bumblehead.com>
+Copyright (c) 2015 [Bumblehead][0] <chris@bumblehead.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
