@@ -25,7 +25,7 @@ fnguard.isobj([]);   // error !fnguard.check.isobj([])
 An [accessory script is available][2] separately to strip-out fnguard from a script. This makes it easy to use `fnguard` for development while removing fnguard from production deployments, where it may adversly effect performance and script size.
 
 Todo:
- - it would be great if fnguard would be configurable for custom types (similar to how [Erlang does this][3])
+ - would be great if fnguard could use custom types (similar to how [Erlang does this][3])
 
 
 [0]: http://www.bumblehead.com                            "bumblehead"
