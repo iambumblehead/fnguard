@@ -64,7 +64,7 @@ toelem: function(sess, cfg, tplstr, data, elem, fn) {
 ---------------------------------------------------------
 #### <a id="how"></a>How comparisons are made:
 
-```javscript
+```javascript
 spec = {
   isobj : function (o) {
     return typeof o === 'object' 
