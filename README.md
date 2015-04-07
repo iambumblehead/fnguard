@@ -65,53 +65,55 @@ toelem: function(sess, cfg, tplstr, data, elem, fn) {
 #### <a id="how"></a>How comparisons are made:
 
 ```javscript
-isobj : function (o) {
-  return typeof o === 'object' 
-    && !spec.isarr(o) 
-    && !spec.isdate(o)
-    && !spec.isnull(o);
-},
-isnumstr : function (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-},
-isnum : function (n) {
-  return typeof n === 'number';
-},
-isfn : function (n) {
-  return typeof n === 'function';
-},
-isstr : function (n) {
-  return typeof n === 'string';
-},
-isarr : function (n) {
-  return Array.isArray(n);
-},
-isnull : function (n) {
-  return n === null;
-},
-isbool : function (n) {
-  return typeof n === 'boolean';
-},
-isundefined : function (n) {
-  return typeof n === 'undefined';
-},
-isdomelem : function (n) {
-  return n instanceof Element;
-},
-isdate : function (n) {
-  return n instanceof Date && !isNaN(n);
-},
-isany : function (n) {
-  return true;
-}
+spec = {
+  isobj : function (o) {
+    return typeof o === 'object' 
+      && !spec.isarr(o) 
+      && !spec.isdate(o)
+      && !spec.isnull(o);
+  },
+  isnumstr : function (n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  },
+  isnum : function (n) {
+    return typeof n === 'number';
+  },
+  isfn : function (n) {
+    return typeof n === 'function';
+  },
+  isstr : function (n) {
+    return typeof n === 'string';
+  },
+  isarr : function (n) {
+    return Array.isArray(n);
+  },
+  isnull : function (n) {
+    return n === null;
+  },
+  isbool : function (n) {
+    return typeof n === 'boolean';
+  },
+  isundefined : function (n) {
+    return typeof n === 'undefined';
+  },
+  isdomelem : function (n) {
+    return n instanceof Element;
+  },
+  isdate : function (n) {
+    return n instanceof Date && !isNaN(n);
+  },
+  isany : function (n) {
+    return true;
+  }
+};
 ```
 
 A negation function prefixed with _isnot_ is provided for each '_is_' function, for example:
 
 ```javascript
-isnotnum : function (n) {
+spec.isnotnum = function (n) {
   return !spec.isnum(n);
-}
+};
 ```
 
 ---------------------------------------------------------
