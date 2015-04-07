@@ -22,8 +22,11 @@ fnguard.isobj(null); // error !fnguard.check.isobj(null)
 fnguard.isobj([]);   // error !fnguard.check.isobj([])
 ```
 
+An [accessory script is available][2] separately to strip-out fnguard from a script. This makes it easy to use `fnguard` for development while removing fnguard from production deployments, where it may adversly effect performance and script size.
+
 [0]: http://www.bumblehead.com                            "bumblehead"
 [1]: https://github.com/iambumblehead/fnguard/blob/master/fnguard.js
+[2]: https://github.com/iambumblehead/fnguard/blob/master/fnguardrm.js
 
 ---------------------------------------------------------
 #### <a id="install"></a>Install:
@@ -61,176 +64,55 @@ toelem: function(sess, cfg, tplstr, data, elem, fn) {
 ---------------------------------------------------------
 #### <a id="how"></a>How comparisons are made:
 
- * **fnguard.isobj**
-   ```javascript
-   isobj : function (o) {
-     return typeof o === 'object'
-       && !this.isarr(o) 
-       && !this.isdate(o)
-       && !this.isnull(o);
-   }
-   ```
+```javscript
+isobj : function (o) {
+  return typeof o === 'object' 
+    && !spec.isarr(o) 
+    && !spec.isdate(o)
+    && !spec.isnull(o);
+},
+isnumstr : function (n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+},
+isnum : function (n) {
+  return typeof n === 'number';
+},
+isfn : function (n) {
+  return typeof n === 'function';
+},
+isstr : function (n) {
+  return typeof n === 'string';
+},
+isarr : function (n) {
+  return Array.isArray(n);
+},
+isnull : function (n) {
+  return n === null;
+},
+isbool : function (n) {
+  return typeof n === 'boolean';
+},
+isundefined : function (n) {
+  return typeof n === 'undefined';
+},
+isdomelem : function (n) {
+  return n instanceof Element;
+},
+isdate : function (n) {
+  return n instanceof Date && !isNaN(n);
+},
+isany : function (n) {
+  return true;
+}
+```
 
- * **fnguard.isnotobj**
-   ```javascript
-   isnotobj : function (o) {
-     return fnguard.isobj();
-   }
-   ```
+A negation function prefixed with _isnot_ is provided for each '_is_' function, for example:
 
- * **fnguard.isnum**
-   ```javascript
-   isnum : function (n) {
-     return typeof n === 'number'
-   }
-   ```
-
- * **fnguard.isnotnum**
-   ```javascript
-   isnotnum : function (n) {
-     return !fnguard.isnum(n);
-   }
-   ```
-
- * **fnguard.isnumstr**
-   ```javascript
-   isnumstr : function (n) {
-     return !isNaN(parseFloat(n)) && isFinite(n);
-   }
-   ```
-
- * **fnguard.isnotnumstr**
-   ```javascript
-   isnotnumstr : function (n) {
-     return !fnguard.isnumstr(n);
-   }
-   ```
-
- * **fnguard.isfn**
-   ```javascript
-   isfn : function (n) {
-     return typeof n === 'function';
-   }
-   ```
-
- * **fnguard.isnotfn**
-   ```javascript
-   isnotfn : function (n) {
-     return !fnguard.isfn(n);
-   }
-   ```
-
- * **fnguard.isstr**
-   ```javascript
-   isstr : function (n) {
-     return typeof n === 'string';
-   }
-   ```
-
- * **fnguard.isnotstr**
-   ```javascript
-   isnotstr : function (n) {
-     return !fnguard.isstr(n);
-   }
-   ```
-
- * **fnguard.isarr**
-   ```javascript
-   isarr : function (n) {
-     return Array.isArray(n);
-   }
-   ```
-
- * **fnguard.isnotarr**
-   ```javascript
-   isnotarr : function (n) {
-     return !fnguard.isarr(n);
-   }
-   ```
-
- * **fnguard.isnull**
-   ```javascript
-   isnull : function (n) {
-     return n === null;
-   }
-   ```
-
- * **fnguard.isnotnull**
-   ```javascript
-   isnotnull : function (n) {
-     return !fnguard.isnull(n);
-   }
-   ```
-
- * **fnguard.isbool**
-   ```javascript
-   isbool : function (n) {
-     return typeof n === 'boolean';
-   }
-   ```
-
- * **fnguard.isnotbool**
-   ```javascript
-   isnotbool : function (n) {
-     return !fnguard.isbool(n);
-   }
-   ```
-
- * **fnguard.isundefined**
-   ```javascript
-   isundefined : function (n) {
-     return typeof n === 'undefined';
-   }
-   ```
-
- * **fnguard.isnotundefined**
-   ```javascript
-   isnotundefined : function (n) {
-     return !fnguard.isundefined(n);
-   }
-   ```
-
- * **fnguard.isdomelem**
-   ```javascript
-   isdomelem : function (n) {
-     return n instanceof Element;
-   }
-   ```
-
- * **fnguard.isnotdomelem**
-   ```javascript
-   isnotdomelem : function (n) {
-     return !fnguard.isdomelem(n);
-   }
-   ```
-
- * **fnguard.isdate**
-   ```javascript
-   isdate : function (n) {
-     return n instanceof Date && !isNaN(n);
-   }
-   ```
-
- * **fnguard.isnotdate**
-   ```javascript
-   isnotdate : function (n) {
-     return !fnguard.isdate(n);
-   }
-   ```
-
- * **fnguard.isany**
-   ```javascript
-   isany : function (n) {
-     return true;
-   }
-   ```
-
- * **fnguard.isnotany**
-   ```javascript
-   isnotany : function (n) {
-     return !fnguard.isany(n)
-   }
-   ```
+```javascript
+isnotnum : function (n) {
+  return !spec.isnum(n);
+}
+```
 
 ---------------------------------------------------------
 #### <a id="license">License:
