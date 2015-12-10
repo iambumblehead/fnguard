@@ -2,7 +2,7 @@
 // Timestamp: 2015.02.17-23:20:43 (last modified)  
 // Author(s): Bumblehead (www.bumblehead.com)
 
-var fnguard = ((typeof module === 'object') ? module : {}).exports = (function (check, spec, guarderror) {
+var fnguard = module.exports = (function (check, spec, guarderror) {
 
   spec = {
     isobj : function (o) {
