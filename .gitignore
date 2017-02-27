@@ -1,2 +1,4 @@
 node_modules
 README.html
+npm-debug.log
+.tern-port

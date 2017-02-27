@@ -5,45 +5,48 @@
 var fnguard = module.exports = (function (check, spec, guarderror) {
 
   spec = {
-    isobj : function (o) {
+    isobj : o => {
       return typeof o === 'object' 
         && !spec.isarr(o) 
         && !spec.isdate(o)
-        && !spec.isnull(o);
+        && !spec.isnull(o)
+        && !spec.isre(o);
     },
-    isnumstr : function (n) {
-      return !isNaN(parseFloat(n)) && isFinite(n);  
-    },
-    isnum : function (n) {
-      return typeof n === 'number';  
-    },
-    isfn : function (n) {
-      return typeof n === 'function';  
-    },
-    isstr : function (n) {
-      return typeof n === 'string';
-    },
-    isarr : function (n) {
-      return Array.isArray(n);
-    },
-    isnull : function (n) {
-      return n === null;
-    },
-    isbool : function (n) {
-      return typeof n === 'boolean';
-    },    
-    isundefined : function (n) {
-      return typeof n === 'undefined';
-    },
-    isdomelem : function (n) {
-      return n instanceof Element;
-    },
-    isdate : function (n) {
-      return n instanceof Date && !isNaN(n);
-    },
-    isany : function (n) {
-      return true;
-    }
+    isnumstr : n =>
+      !isNaN(parseFloat(n)) && isFinite(n),
+
+    isnum : n =>
+      typeof n === 'number',
+
+    isfn : n =>
+      typeof n === 'function',
+
+    isstr : n =>
+      typeof n === 'string',
+
+    isarr : n =>
+      Array.isArray(n),
+
+    isnull : n =>
+      n === null,
+
+    isbool : n =>
+      typeof n === 'boolean',
+
+    isundefined : n =>
+      typeof n === 'undefined',
+
+    isdomelem : n =>
+      n instanceof Element,
+
+    isdate : n =>
+      n instanceof Date && !isNaN(n),
+
+    isre : n =>
+      n instanceof RegExp,
+
+    isany : n =>
+      true
   };
 
   // define first message of stack to indicate source fnguard callee
@@ -84,6 +87,7 @@ var fnguard = module.exports = (function (check, spec, guarderror) {
   });
 
   check.spec = spec;
+  
   return check;
 
 }({}));

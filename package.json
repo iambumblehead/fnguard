@@ -1,6 +1,8 @@
 {
   "name": "fnguard",
-  "version": "0.6.19",
+  "readmeFilename": "README.md",
+  "description": "javascript function guards",
+  "version": "0.6.2",
   "license" : "MIT",
   "main" : "fnguard.js",
   "repository": {
@@ -14,11 +16,10 @@
     "types"
   ],
   "devDependencies" : {
-      "jasmine-node" : ">=1.3.0"
+    "jasmine": "2.5.3",
+    "jasmine-spec-reporter": "3.2.0"
   },
   "scripts" : {
-      "test" : "node node_modules/jasmine-node/bin/jasmine-node --verbose test/"
-  },
-  "readmeFilename": "README.md",
-  "description": "javascript function guards"
+    "test": "node node_modules/jasmine/bin/jasmine.js --verbose"
+  }
 }
