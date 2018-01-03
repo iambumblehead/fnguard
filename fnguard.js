@@ -2,7 +2,7 @@
 // Timestamp: 2015.02.17-23:20:43 (last modified)
 // Author(s): Bumblehead (www.bumblehead.com)
 
-module.exports = (function (check, spec, guarderror) {
+module.exports = ((check, spec, guarderror) => {
   spec = {
     isobj : o =>
       typeof o === 'object'
@@ -49,7 +49,7 @@ module.exports = (function (check, spec, guarderror) {
   };
 
   // define first message of stack to indicate source fnguard callee
-  guarderror = function (checkfnname, arg, i) {
+  guarderror = (checkfnname, arg, i) => {
     throw new Error(
       '!fnguard.check.:fnname(:argval), arguments[:i] :msg'
         .replace(/:fnname/, checkfnname)
@@ -85,4 +85,4 @@ module.exports = (function (check, spec, guarderror) {
   check.spec = spec;
 
   return check;
-}({}));
+})({});
