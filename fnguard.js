@@ -2,7 +2,7 @@
 // Timestamp: 2015.02.17-23:20:43 (last modified)
 // Author(s): Bumblehead (www.bumblehead.com)
 
-module.exports = ((check, spec, guarderror) => {
+module.exports = ((check, spec, guarderror, custError, cropMessage) => {
   spec = {
     isobj : o =>
       typeof o === 'object'
@@ -48,17 +48,31 @@ module.exports = ((check, spec, guarderror) => {
       true
   };
 
+  cropMessage = (message, lines) => {
+    const [head, ...rest] = lines || message.split('\n');
+    
+    return /fnguard[^\n]*/i.test(rest)
+      ? cropMessage(message, rest)
+      : rest.join('\n');
+  };
+
+  custError = (message, err) => {
+    err = new Error(message);
+    err.stack = cropMessage(err.stack);
+    throw err;
+  };
+
   // define first message of stack to indicate source fnguard callee
   guarderror = (checkfnname, arg, i) => {
-    throw new Error(
-      '!fnguard.check.:fnname(:argval), arguments[:i] :msg'
+    custError(
+      '\n!fnguard.check.:fnname( :argval ),\n  arg num: :i (0 is first),\n  :msg'
         .replace(/:fnname/, checkfnname)
         .replace(/:msg/, new Error().stack.split(/\n/gi)[5].replace(/^ */, ''))
         .replace(/:i/, i)
         .replace(/:argval/, () => {
           if (typeof arg === 'string') {
             arg = arg.length > 30 ? `${arg.slice(0, 30)}…` : arg;
-            arg = `"${arg}"`;
+            arg = `“${arg}”`;
           } else if (Array.isArray(arg)) {
             arg = `[${arg.toString()}]`;
           } else if (arg instanceof Date) {
