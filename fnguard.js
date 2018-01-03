@@ -1,17 +1,16 @@
 // Filename: fnguard.js
-// Timestamp: 2015.02.17-23:20:43 (last modified)  
+// Timestamp: 2015.02.17-23:20:43 (last modified)
 // Author(s): Bumblehead (www.bumblehead.com)
 
-var fnguard = module.exports = (function (check, spec, guarderror) {
-
+module.exports = (function (check, spec, guarderror) {
   spec = {
-    isobj : o => {
-      return typeof o === 'object' 
-        && !spec.isarr(o) 
-        && !spec.isdate(o)
-        && !spec.isnull(o)
-        && !spec.isre(o);
-    },
+    isobj : o =>
+      typeof o === 'object'
+      && !spec.isarr(o)
+      && !spec.isdate(o)
+      && !spec.isnull(o)
+      && !spec.isre(o),
+
     isnumstr : n =>
       !isNaN(parseFloat(n)) && isFinite(n),
 
@@ -45,49 +44,45 @@ var fnguard = module.exports = (function (check, spec, guarderror) {
     isre : n =>
       n instanceof RegExp,
 
-    isany : n =>
+    isany : () =>
       true
   };
 
   // define first message of stack to indicate source fnguard callee
-  guarderror = function (checkfnname, arg, i) {    
+  guarderror = function (checkfnname, arg, i) {
     throw new Error(
-      "!fnguard.check.:fnname(:argval), arguments[:i] :msg"
+      '!fnguard.check.:fnname(:argval), arguments[:i] :msg'
         .replace(/:fnname/, checkfnname)
         .replace(/:msg/, new Error().stack.split(/\n/gi)[5].replace(/^ */, ''))
         .replace(/:i/, i)
-        .replace(/:argval/, function () {
+        .replace(/:argval/, () => {
           if (typeof arg === 'string') {
-            arg = arg.length > 30 ? arg.slice(0, 30) + '...' : arg;
-            arg = '"' + arg + '"';
+            arg = arg.length > 30 ? `${arg.slice(0, 30)}…` : arg;
+            arg = `"${arg}"`;
           } else if (Array.isArray(arg)) {
-            arg = "[" + arg.toString() + "]";
+            arg = `[${arg.toString()}]`;
           } else if (arg instanceof Date) {
-            arg = "instanceof Date, " + arg;
+            arg = `instanceof Date, ${arg}`;
           }
 
           return arg;
         })
-    );      
+    );
   };
 
   // construct 'isnot' functions from 'is' functions
-  Object.keys(spec).forEach(function (fnname) {
-    spec[fnname.replace(/^is/, 'isnot')] = function (arg) {
-      return !spec[fnname](arg);
-    };
-  });
+  Object.keys(spec).forEach(fnname =>
+    spec[fnname.replace(/^is/, 'isnot')] = arg =>
+      !spec[fnname](arg));
 
-  Object.keys(spec).forEach(function (checkfnname) {
-    check[checkfnname] = function () {
-      return Array.prototype.every.call(arguments, function (arg, i) {
-        return spec[checkfnname](arg) || guarderror(checkfnname, arg, i);
-      }) && check;
-    };
+  Object.keys(spec).forEach(checkfnname => {
+    check[checkfnname] = (...args) =>
+      Array.prototype.every.call(args, (arg, i) => (
+        spec[checkfnname](arg) || guarderror(checkfnname, arg, i)
+      )) && check;
   });
 
   check.spec = spec;
-  
-  return check;
 
+  return check;
 }({}));

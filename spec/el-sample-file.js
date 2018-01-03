@@ -1,9 +1,13 @@
-var fnguard = require('../fnguard');
+let fnguard = require('../fnguard');
 
 function testfun1 (a, b, c) {
-    fnguard.isobj(a, b).isbool(c);
+  fnguard.isobj(a, b).isbool(c);
 }
 
 function testfun2 (a, b, c) {
-    fnguard.isobj(a, b).isbool(c);
+  fnguard.isobj(a, b).isbool(c);
 }
+
+testfun1();
+testfun2();
+

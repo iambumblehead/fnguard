@@ -1,10 +1,10 @@
 {
   "name": "fnguard",
+  "main": "fnguard.js",
   "readmeFilename": "README.md",
   "description": "javascript function guards",
-  "version": "0.6.2",
-  "license" : "MIT",
-  "main" : "fnguard.js",
+  "version": "0.6.3",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/iambumblehead/fnguard.git"
@@ -15,11 +15,24 @@
     "typing",
     "types"
   ],
-  "devDependencies" : {
+  "devDependencies": {
     "jasmine": "2.5.3",
-    "jasmine-spec-reporter": "3.2.0"
+    "jasmine-spec-reporter": "3.2.0",
+    "pre-commit": "^1.2.2",
+    "eslint": "^4.7.2",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "babel-eslint": "^7.2.3",
+    "eslint-plugin-import": "^2.7.0"
   },
-  "scripts" : {
+  "scripts": {
+    "lint": "eslint 'src/*.js'",
+    "fix": "eslint --fix 'spec/*.js'",
     "test": "node node_modules/jasmine/bin/jasmine.js --verbose"
+  },
+  "pre-commit": {
+    "silent": true,
+    "run": [
+      "lint"
+    ]
   }
 }
