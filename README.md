@@ -1,28 +1,39 @@
 fnguard
 =======
-**(c)[Bumblehead][0], 2015** [MIT-license](#license)
+**(c)[Bumblehead][0]** [MIT-license](#license)
 
-### Overview:
+fnguard provides something similar to an Erlang-style "function guard". Inside the function, the parameter types are specified and, at runtime, if one of the params is wrong, and error is thrown and with a message explaining which parameter failed and a stack trace started from the call to fnguard.
 
+The functions used to test each value are made to be safe and logical. For example, the function used for 'isobj' and 'isnotobj' looks like this, so that `null` and other values don't pass the test.
+
+``` javascript
+isobj : o =>
+  typeof o === 'object'
+  && !spec.isarr(o)
+  && !spec.isdate(o)
+  && !spec.isnull(o)
+  && !spec.isre(o);
+```
+
+Here's an example of its usage
 ```javascript
-function gethtml(session, config, templatename, dataarr) {
+gethtml = (session, config, templatename, dataarr) => {
   fnguard.isobj(session, config).isstr(templatename).isarr(dataarr);
+  
   // continue
 }
 ```
 
-Use `fnguard` to throw a type-related error message when a function is called with wrong params. This is useful when refactoring bigger javascript codebases for which you have no unit-tests. Simplified rules are used to determine type. For example, native javascript returns `true` here:
+`fnguard` is useful when refactoring bigger javascript codebases for which you have no unit-tests. Or highly dynamic sources which are difficult to type check. Run the tests or look at the [source code][1] (small) to understand how it handles comparison.
+
+A negation function prefixed with _isnot_ is provided for each '_is_' function, for example:
+
 ```javascript
-typeof null === 'object' && typeof [] === 'object'
+spec.isnotnum = function (n) {
+  return !spec.isnum(n);
+};
 ```
 
-Analogous comparison does not pass `fnguard`. Run the tests or look at the [source code][1] (small) to understand how it handles comparison.
-```javascript
-fnguard.isobj(null); // error !fnguard.check.isobj(null)
-fnguard.isobj([]);   // error !fnguard.check.isobj([])
-```
-
-An [accessory script is available][2] separately to strip-out fnguard from a script. This makes it easy to use `fnguard` for development while removing fnguard from production deployments, where it may adversly effect performance and script size.
 
 Todo:
  - would be great if fnguard could use custom types (similar to how [Erlang does this][3])
@@ -33,102 +44,12 @@ Todo:
 [2]: https://github.com/iambumblehead/fnguardrm
 [3]: http://www.erlang.org/doc/reference_manual/typespec.html "erlang type spec"
 
----------------------------------------------------------
-#### <a id="install"></a>Install:
-
-```bash
-$ npm install fnguard
-```
-
----------------------------------------------------------
-#### <a id="test"></a>Test:
-
-```bash
-$ npm test
-```
-
----------------------------------------------------------
-#### <a id="example"></a>Example:
-
-A real method from an application using fnguard. An error is thrown right away if a parameter is 'wrong'.
-
-```javascript
-toelem: function(sess, cfg, tplstr, data, elem, fn) {
-  fnguard.isobj(sess, cfg).isstr(tplstr).isobj(data).isdomelem(elem);
-  fn = optfn(fn);
-  
-  this.depthfirstrender(sess, cfg, tplstr, data, function (err, htmlstr) {
-    if (err) return fn(err);
-    
-    elem.innerHTML = htmlstr;
-    fn(null, elem);
-  });
-},
-```
-
----------------------------------------------------------
-#### <a id="how"></a>How comparisons are made:
-
-```javascript
-spec = {
-  isobj : function (o) {
-    return typeof o === 'object' 
-      && !spec.isarr(o) 
-      && !spec.isdate(o)
-      && !spec.isnull(o);
-  },
-  isnumstr : function (n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-  },
-  isnum : function (n) {
-    return typeof n === 'number';
-  },
-  isfn : function (n) {
-    return typeof n === 'function';
-  },
-  isstr : function (n) {
-    return typeof n === 'string';
-  },
-  isarr : function (n) {
-    return Array.isArray(n);
-  },
-  isnull : function (n) {
-    return n === null;
-  },
-  isbool : function (n) {
-    return typeof n === 'boolean';
-  },
-  isundefined : function (n) {
-    return typeof n === 'undefined';
-  },
-  isdomelem : function (n) {
-    return n instanceof Element;
-  },
-  isdate : function (n) {
-    return n instanceof Date && !isNaN(n);
-  },
-  isany : function (n) {
-    return true;
-  }
-};
-```
-
-A negation function prefixed with _isnot_ is provided for each '_is_' function, for example:
-
-```javascript
-spec.isnotnum = function (n) {
-  return !spec.isnum(n);
-};
-```
-
----------------------------------------------------------
-#### <a id="license">License:
 
  ![scrounge](https://github.com/iambumblehead/scroungejs/raw/master/img/hand.png) 
 
 (The MIT License)
 
-Copyright (c) 2015 [Bumblehead][0] <chris@bumblehead.com>
+Copyright (c) [Bumblehead][0] <chris@bumblehead.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
