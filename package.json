@@ -9,6 +9,9 @@
   "exports": {
     "import": "./fnguard.js"
   },
+  "files": [
+    "./fnguard.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iambumblehead/fnguard.git"
