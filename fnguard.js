@@ -49,7 +49,7 @@ export default ((check, spec, guarderror, custError, cropMessage) => {
   };
 
   cropMessage = (message, lines) => {
-    const [head, ...rest] = lines || message.split('\n');
+    const [ , ...rest] = lines || message.split('\n');
     
     return /fnguard[^\n]*/i.test(rest)
       ? cropMessage(message, rest)

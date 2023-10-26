@@ -12,7 +12,8 @@
     "allowImportExportEverywhere": true
   },  
   "globals": {
-    "Set": true
+    "Set": true,
+    "Element": true
   },
   "rules": {
     "global-require": 0,

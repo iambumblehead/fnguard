@@ -25,6 +25,7 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "lintfix": "eslint --fix .",
     "test" : "node --test ./fnguard.test.js"
   }
 }
