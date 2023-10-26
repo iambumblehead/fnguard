@@ -2,7 +2,7 @@
 // Timestamp: 2015.02.17-23:20:43 (last modified)
 // Author(s): Bumblehead (www.bumblehead.com)
 
-module.exports = ((check, spec, guarderror, custError, cropMessage) => {
+export default ((check, spec, guarderror, custError, cropMessage) => {
   spec = {
     isobj : o =>
       typeof o === 'object'
