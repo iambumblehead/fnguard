@@ -2,7 +2,7 @@
 // Timestamp: 2015.02.17-23:20:43 (last modified)
 // Author(s): Bumblehead (www.bumblehead.com)
 
-module.exports = ((check, spec, guarderror, custError, cropMessage) => {
+export default ((check, spec, guarderror, custError, cropMessage) => {
   spec = {
     isobj : o =>
       typeof o === 'object'
@@ -49,7 +49,7 @@ module.exports = ((check, spec, guarderror, custError, cropMessage) => {
   };
 
   cropMessage = (message, lines) => {
-    const [head, ...rest] = lines || message.split('\n');
+    const [ , ...rest] = lines || message.split('\n');
     
     return /fnguard[^\n]*/i.test(rest)
       ? cropMessage(message, rest)

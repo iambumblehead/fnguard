@@ -40,12 +40,12 @@ Todo:
 
 
 [0]: http://www.bumblehead.com                            "bumblehead"
-[1]: https://github.com/iambumblehead/fnguard/blob/master/fnguard.js
+[1]: https://github.com/iambumblehead/fnguard/blob/main/fnguard.js
 [2]: https://github.com/iambumblehead/fnguardrm
 [3]: http://www.erlang.org/doc/reference_manual/typespec.html "erlang type spec"
 
 
- ![scrounge](https://github.com/iambumblehead/scroungejs/raw/master/img/hand.png) 
+ ![scrounge](https://github.com/iambumblehead/scroungejs/raw/main/img/hand.png) 
 
 (The MIT License)
 
