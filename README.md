@@ -4,16 +4,7 @@ fnguard
 
 fnguard provides something similar to an Erlang-style "function guard". Inside the function, the parameter types are specified and, at runtime, if one of the params is wrong, and error is thrown and with a message explaining which parameter failed and a stack trace started from the call to fnguard.
 
-The functions used to test each value are made to be safe and logical. For example, the function used for 'isobj' and 'isnotobj' looks like this, so that `null` and other values don't pass the test.
-
-``` javascript
-const isobj = o =>
-  typeof o === 'object'
-  && !spec.isarr(o)
-  && !spec.isdate(o)
-  && !spec.isnull(o)
-  && !spec.isre(o)
-```
+The function used for 'isobj' returns false for array, date, null, regexp and other not-object things that return 'object' from typeof experessions.
 
 Here's an example of its usage
 ```javascript
@@ -39,7 +30,7 @@ Todo:
  - would be great if fnguard could use custom types (similar to how [Erlang does this][3])
 
 
-[0]: http://www.bumblehead.com                            "bumblehead"
+[0]: https://bumblehead.com                            "bumblehead"
 [1]: https://github.com/iambumblehead/fnguard/blob/main/fnguard.js
 [2]: https://github.com/iambumblehead/fnguardrm
 [3]: http://www.erlang.org/doc/reference_manual/typespec.html "erlang type spec"

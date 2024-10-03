@@ -2,50 +2,38 @@
 // Timestamp: 2015.02.17-23:20:43 (last modified)
 // Author(s): Bumblehead (www.bumblehead.com)
 
+const isobj = ((getproto, objproto = getproto({})) =>
+  obj => obj && (getproto(obj) === objproto)
+)(Object.getPrototypeOf)
+
+const isnumstr = n => !isNaN(parseFloat(n)) && isFinite(n)
+const isnum = n => typeof n === 'number'
+const isfn = n => typeof n === 'function'
+const isstr = n => typeof n === 'string'
+const isarr = n => Array.isArray(n)
+const isnull = n => n === null
+const isbool = n => typeof n === 'boolean'
+const isundefined = n => typeof n === 'undefined'
+const isdomelem = n => n instanceof Element
+const isdate = n => n instanceof Date && !isNaN(n)
+const isre = n => n instanceof RegExp
+const isany = () => true
+
 export default ((check, spec, guarderror, custError, cropMessage) => {
   spec = {
-    isobj: o =>
-      typeof o === 'object'
-      && !spec.isarr(o)
-      && !spec.isdate(o)
-      && !spec.isnull(o)
-      && !spec.isre(o),
-
-    isnumstr: n =>
-      !isNaN(parseFloat(n)) && isFinite(n),
-
-    isnum: n =>
-      typeof n === 'number',
-
-    isfn: n =>
-      typeof n === 'function',
-
-    isstr: n =>
-      typeof n === 'string',
-
-    isarr: n =>
-      Array.isArray(n),
-
-    isnull: n =>
-      n === null,
-
-    isbool: n =>
-      typeof n === 'boolean',
-
-    isundefined: n =>
-      typeof n === 'undefined',
-
-    isdomelem: n =>
-      n instanceof Element,
-
-    isdate: n =>
-      n instanceof Date && !isNaN(n),
-
-    isre: n =>
-      n instanceof RegExp,
-
-    isany: () =>
-      true
+    isobj,
+    isnumstr,
+    isnum,
+    isfn,
+    isstr,
+    isarr,
+    isnull,
+    isbool,
+    isundefined,
+    isdomelem,
+    isdate,
+    isre,
+    isany
   }
 
   cropMessage = (message, lines) => {
@@ -70,12 +58,12 @@ export default ((check, spec, guarderror, custError, cropMessage) => {
         .replace(/:msg/, new Error().stack.split(/\n/gi)[5].replace(/^ */, ''))
         .replace(/:i/, i)
         .replace(/:argval/, () => {
-          if (typeof arg === 'string') {
+          if (isstr(arg)) {
             arg = arg.length > 30 ? `${arg.slice(0, 30)}…` : arg
             arg = `“${arg}”`
-          } else if (Array.isArray(arg)) {
+          } else if (isarr(arg)) {
             arg = `[${arg.toString()}]`
-          } else if (arg instanceof Date) {
+          } else if (isdate(arg)) {
             arg = `instanceof Date, ${arg}`
           }
 
