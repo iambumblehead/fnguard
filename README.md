@@ -7,19 +7,19 @@ fnguard provides something similar to an Erlang-style "function guard". Inside t
 The functions used to test each value are made to be safe and logical. For example, the function used for 'isobj' and 'isnotobj' looks like this, so that `null` and other values don't pass the test.
 
 ``` javascript
-isobj : o =>
+const isobj = o =>
   typeof o === 'object'
   && !spec.isarr(o)
   && !spec.isdate(o)
   && !spec.isnull(o)
-  && !spec.isre(o);
+  && !spec.isre(o)
 ```
 
 Here's an example of its usage
 ```javascript
 gethtml = (session, config, templatename, dataarr) => {
-  fnguard.isobj(session, config).isstr(templatename).isarr(dataarr);
-  
+  fnguard.isobj(session, config).isstr(templatename).isarr(dataarr)
+
   // continue
 }
 ```
@@ -30,8 +30,8 @@ A negation function prefixed with _isnot_ is provided for each '_is_' function, 
 
 ```javascript
 spec.isnotnum = function (n) {
-  return !spec.isnum(n);
-};
+  return !spec.isnum(n)
+}
 ```
 
 
