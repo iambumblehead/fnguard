@@ -18,10 +18,13 @@ const isdomelem = n => n instanceof Element
 const isdate = n => n instanceof Date && !isNaN(n)
 const isre = n => n instanceof RegExp
 const isany = () => true
+const isobjlike = o => typeof o === 'object'
+  && !(isarr(o) || isdate(o) || isnull(o) || isre(o))
 
 export default ((check, spec, guarderror, custError, cropMessage) => {
   spec = {
     isobj,
+    isobjlike,
     isnumstr,
     isnum,
     isfn,
