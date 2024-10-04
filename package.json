@@ -4,7 +4,7 @@
   "type": "module",
   "readmeFilename": "README.md",
   "description": "javascript function guards",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "license": "MIT",
   "exports": {
     "import": "./fnguard.js"
