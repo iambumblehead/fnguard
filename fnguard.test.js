@@ -27,6 +27,28 @@ test('should be easily demonstrated (throw Error)', () => {
   }
 })
 
+describe('fnguard.isobjlike( arg )', () => {
+  function guardedfn (a) {
+    try {
+      return fnguard.isobjlike(a) && true
+    } catch (e) {
+      return e.message
+    }
+  }
+
+  it('should return true for class instance', () => {
+    class MyClass {
+      constructor(value) {
+        this.value = value
+
+        return this
+      }
+    }
+
+    assert.strictEqual(guardedfn(new MyClass('value')), true)
+  })
+})
+
 describe('fnguard.isobj( arg )', () => {
   function guardedfn (a) {
     try {
